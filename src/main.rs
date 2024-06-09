@@ -45,10 +45,15 @@ serde_json = \"1.0.115\"").unwrap();
     // Add license file to ubl-rs directory
     let mut license_path = out_path.to_owned();
     license_path.push("LICENSE");
+
+    // Add .gitignore file to ubl-rs directory
+    let mut license_path = out_path.to_owned();
+    license_path.push(".gitignore");
     
     // Read license and readme file from ubl-rs-out directory
     let readme_out = PathBuf::from("./ubl-rs-out/README.md");
     let license_out = PathBuf::from("./ubl-rs-out/LICENSE");
+    let gitignore_out = PathBuf::from("./ubl-rs-out/.gitignore");
 
     // Copy readme file to ubl-rs directory
     std::fs::copy(&readme_out, &readme_path)
@@ -56,6 +61,9 @@ serde_json = \"1.0.115\"").unwrap();
 
     std::fs::copy(&license_out, &license_path)
         .expect("Failed to copy ubl-rs LICENSE file from ./ubl-rs-out directory");
+
+    std::fs::copy(&gitignore_out, &license_path)
+        .expect("Failed to copy ubl-rs .gitignore file from ./ubl-rs-out directory");
 
     // Build and save library
     let out_path = "../ubl-rs/src";
